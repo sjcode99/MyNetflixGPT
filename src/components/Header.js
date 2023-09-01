@@ -43,11 +43,11 @@ const Header = () => {
   return (
     <div className="absolute w-screen px-8 bg-gradient-to-b from-black z-10 flex justify-between">
       <img
-        className="w-[15rem] ml-[3%]"
+        className={user ? "w-[10rem] ml-[3%]" : "w-[15rem] ml-[3%"}
         src={NETFLIX_LOGO}
         alt="Netflix-Logo"
       />
-      <div className="flex m-2 justify-center items-center">
+      <div className="flex p-2 justify-center items-center">
         {/* <img
           className="w-12 h-12"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS2RCLUPq1JgEPmHByabXOF8kuno6klS2moQ&usqp=CAU"
