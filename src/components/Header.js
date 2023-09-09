@@ -5,11 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { NETFLIX_LOGO } from "../utils/constants";
+import { toggleGptSearchView } from "../utils/gptSlice";
+import { SUPPORTED_LANGUAGES } from "../utils/constants";
+import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store) => store.gpt?.showGptSearch);
   // console.log(user);
 
   const handleSignOut = () => {
@@ -21,6 +25,14 @@ const Header = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handleGptSearchView = () => {
+    dispatch(toggleGptSearchView());
+  };
+
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
   };
 
   useEffect(() => {
@@ -54,12 +66,32 @@ const Header = () => {
           alt="userIcon"
         /> */}
         {user && (
-          <button
-            className="bg-[#e50914] rounded-[4px] text-white w-[90px] h-[40px]"
-            onClick={handleSignOut}
-          >
-            Sign Out
-          </button>
+          <>
+            <select
+              defaultValue={"en"}
+              className="p-2 m-2 bg-gray-900 text-white rounded-[4px]"
+              onChange={handleLanguageChange}
+            >
+              {SUPPORTED_LANGUAGES.map(({ label, code }) => (
+                <option key={code} value={code}>
+                  {label}
+                </option>
+              ))}
+            </select>
+            <button
+              className="text-white py-2 px-4 m-2 bg-purple-800 rounded-[4px]"
+              onClick={handleGptSearchView}
+            >
+              {showGptSearch ? "HomePage" : "GPT Search"}
+            </button>
+
+            <button
+              className="bg-[#e50914] rounded-[4px] text-white w-[90px] h-[40px]"
+              onClick={handleSignOut}
+            >
+              Sign Out
+            </button>
+          </>
         )}
       </div>
     </div>

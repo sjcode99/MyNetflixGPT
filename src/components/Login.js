@@ -9,7 +9,7 @@ import {
 } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { BACKGROUND_PIC } from "../utils/constants";
+import { BACKGROUND_URL } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -79,12 +79,14 @@ const Login = () => {
   const toggleForm = () => {
     setIsSignInForm(!isSignInForm);
   };
+
   return (
     <div>
       <Header />
       <div className="absolute">
-        <img src={BACKGROUND_PIC} alt="backgroundPic" />
+        <img src={BACKGROUND_URL} alt="backgroundPic" />
       </div>
+
       <form
         className="absolute bg-black min-h-[80vh] max-w-[450px] my-36 right-0 left-0 p-12 mx-auto bg-opacity-80"
         onSubmit={(e) => e.preventDefault()}
