@@ -1,35 +1,14 @@
 import React, { useRef } from "react";
 import language from "../../utils/languageConstant";
 import { useDispatch, useSelector } from "react-redux";
-// import { addApiKey } from "../../utils/gptSlice";
-// import OpenAI from "openai";
 import openai from "../../utils/openai";
 import { API_OPTIONS } from "../../utils/constants";
-import { addGptMovieResult } from "../../utils/gptSlice";
+import { addGptMovieResult } from "../../utils/slice/gptSlice";
 
 const GptSearchBar = () => {
   const langKey = useSelector((store) => store.config?.lang);
   const searchText = useRef(null);
-  const apiKeyInput = useRef(null);
   const dispatch = useDispatch();
-
-  //   const OPENAI_KEY = useSelector((store) => store.gpt?.OPENAI_KEY);
-
-  //   const openai = new OpenAI({
-  //     apiKey: "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",
-  //     dangerouslyAllowBrowser: true,
-  //   });
-
-  //   if (apiKeyInput) {
-  //     const openai = new OpenAI({
-  //       apiKey: apiKeyInput?.current?.value,
-  //       dangerouslyAllowBrowser: true,
-  //     });
-  //   }
-
-  //   const handleOpenAIApiKey = () => {
-  //     dispatch(addApiKey(apiKeyInput.current.value));
-  //   };
 
   const searchMovieTMDB = async (movie) => {
     const data = await fetch(
@@ -59,7 +38,7 @@ const GptSearchBar = () => {
     const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
 
     const tmdbResults = await Promise.all(promiseArray);
-    console.log(tmdbResults);
+    // console.log(tmdbResults);
 
     dispatch(
       addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults })
@@ -68,7 +47,6 @@ const GptSearchBar = () => {
 
   return (
     <div className="pt-[35%] md:pt-[10%] flex justify-center">
-      {/* {OPENAI_KEY !== null ? ( */}
       <form
         className="w-full md:w-1/2 bg-black grid grid-cols-12"
         onSubmit={(e) => e.preventDefault()}
@@ -86,25 +64,6 @@ const GptSearchBar = () => {
           {language[langKey].search}
         </button>
       </form>
-      {/* ) : (
-        <form
-          className="w-full md:w-1/2 bg-black grid grid-cols-12"
-          onSubmit={(e) => e.preventDefault()}
-        >
-          <input
-            ref={apiKeyInput}
-            type="text"
-            className=" p-4 m-4 col-span-9"
-            placeholder={language[langKey].apiKeyPlaceholder}
-          />
-          <button
-            className="col-span-3 m-4 py-2 px-4 bg-red-700 text-white rounded-lg"
-            onClick={handleOpenAIApiKey}
-          >
-            Next
-          </button>
-        </form> */}
-      {/* )} */}
     </div>
   );
 };

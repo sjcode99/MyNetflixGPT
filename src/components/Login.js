@@ -8,7 +8,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { addUser } from "../utils/userSlice";
+import { addUser } from "../utils/slice/userSlice";
 import { BACKGROUND_URL } from "../utils/constants";
 
 const Login = () => {

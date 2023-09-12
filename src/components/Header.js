@@ -3,11 +3,11 @@ import { auth } from "../utils/firebase";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, removeUser } from "../utils/userSlice";
+import { addUser, removeUser } from "../utils/slice/userSlice";
 import { NETFLIX_LOGO } from "../utils/constants";
-import { toggleGptSearchView } from "../utils/gptSlice";
+import { toggleGptSearchView } from "../utils/slice/gptSlice";
 import { SUPPORTED_LANGUAGES } from "../utils/constants";
-import { changeLanguage } from "../utils/configSlice";
+import { changeLanguage } from "../utils/slice/configSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
