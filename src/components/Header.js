@@ -61,14 +61,15 @@ const Header = () => {
         src={NETFLIX_LOGO}
         alt="Netflix-Logo"
       />
-      <div className="flex p-2 justify-between md:justify-center items-center">
-        {/* <img
+      {/* <div className="flex p-2 justify-between md:justify-center items-center"> */}
+      {/* <img
           className="w-12 h-12"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS2RCLUPq1JgEPmHByabXOF8kuno6klS2moQ&usqp=CAU"
           alt="userIcon"
         /> */}
-        {user && (
-          <>
+      {user && (
+        <div className="flex md:p-2 justify-between">
+          {showGptSearch && (
             <select
               defaultValue={"en"}
               className="p-2 m-2 bg-gray-900 text-white rounded-[4px]"
@@ -80,22 +81,23 @@ const Header = () => {
                 </option>
               ))}
             </select>
-            <button
-              className="text-white py-2 px-4 m-2 bg-purple-800 rounded-[4px]"
-              onClick={handleGptSearchView}
-            >
-              {showGptSearch ? "HomePage" : "GPT Search"}
-            </button>
+          )}
+          <button
+            className="text-white py-2 px-2 md:px-4 mx-2 md:m-2 bg-purple-800 rounded-[4px]"
+            onClick={handleGptSearchView}
+          >
+            {showGptSearch ? "HomePage" : "GPT Search"}
+          </button>
 
-            <button
-              className="bg-[#e50914] rounded-[4px] text-white w-[90px] h-[40px]"
-              onClick={handleSignOut}
-            >
-              Sign Out
-            </button>
-          </>
-        )}
-      </div>
+          <button
+            className="bg-[#e50914] rounded-[4px] text-white px-2 md:px-4 md:m-2"
+            onClick={handleSignOut}
+          >
+            Sign Out
+          </button>
+        </div>
+      )}
+      {/* </div> */}
     </div>
   );
 };
